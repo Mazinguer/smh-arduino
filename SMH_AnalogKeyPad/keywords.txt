@@ -1,0 +1,43 @@
+#######################################
+# Syntax Coloring Map For SMH_AnalogKeyPad
+#######################################
+
+
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+SMH_AnalogKeyPad	KEYWORD1
+
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+readKey	KEYWORD2
+readKeyBlocking	KEYWORD2
+setRepTrigger	KEYWORD2
+setRepPeriod	KEYWORD2
+getRepTrigger	KEYWORD2
+setRepPeriod	KEYWORD2
+readKeyRep	KEYWORD2
+
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+SMH_AnalogKeyPad_END	 LITERAL1
+K_RIGHT	LITERAL1
+K_UP	LITERAL1
+K_DOWN	LITERAL1
+K_LEFT	LITERAL1
+K_SELECT	LITERAL1
+NO_KEY	LITERAL1
+SMH_AnalogKeyPad_NO_REP	LITERAL1
