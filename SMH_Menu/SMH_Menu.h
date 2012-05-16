@@ -1,6 +1,6 @@
 /*
  * AUTHOR:    Samuel M.H. <samuel.mh@gmail.com>
- * LAST REV:  7-May-2012
+ * LAST REV:  16-May-2012
  * DESCRIPTION:
  *   Arduino C code headers for the SMH_Menu class (Menu widget).
  *
@@ -10,8 +10,9 @@
 #ifndef SMH_Menu_h
 #define SMH_Menu_h
 
-#include "SMH_LiquidCrystal.h"
-#include "SMH_AnalogKeyPad.h"
+//Arduino IDE way to specify paths (compiling issues)
+#include <../SMH_LiquidCrystal/SMH_LiquidCrystal.h>
+#include <../SMH_AnalogKeyPad/SMH_AnalogKeyPad.h>
 
 class SMH_Menu{
   private:
