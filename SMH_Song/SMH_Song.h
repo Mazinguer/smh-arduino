@@ -1,8 +1,8 @@
 /*
  * AUTHOR:    Samuel M.H. <samuel.mh@gmail.com>
- * LAST REV:  10-May-2012
+ * LAST REV:  16-May-2012
  * DESCRIPTION:
- *   Arduino C code headers for the SMH_Song class (playing songs!!).
+ *   Arduino C code headers for the SMH_Song class (play songs!!).
  *
  * LICENSE: GPL V3 <http://www.gnu.org/licenses/gpl.html>
 */
