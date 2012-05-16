@@ -20,7 +20,7 @@ SMH_LiquidCrystal lcd(8,9,4,5,6,7);
 
 
 void setup(){
-  lcd.begin(16,2);           //The screen is 2 lines of 16 characteres
+  lcd.begin(16,2);           //The screen is 2 lines of 16 characters
   lcd.setLightSwitcher(10);  //Pin which controls the backlight
 }
 
