@@ -1,0 +1,31 @@
+#######################################
+# Syntax Coloring Map For SMH_LiquidCrystal
+#######################################
+
+
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+SMH_LiquidCrystal	KEYWORD1
+
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+setLightSwitcher	KEYWORD2
+switchLight	KEYWORD2
+
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+SMH_LiquidCrystal_NOLIGHTSWITCHER	 LITERAL1
