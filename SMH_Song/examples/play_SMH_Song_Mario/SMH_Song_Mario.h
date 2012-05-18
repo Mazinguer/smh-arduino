@@ -14,7 +14,7 @@
  *   <GPL V3 <http://www.gnu.org/licenses/gpl.html>
 */
 
-#define SMH_Song_Mario{                                               \
+#define SMH_Song_Mario                                                \
   (int *[]){                                                          \
    (int[]) {                                                          \
     0,                                                                \
@@ -109,5 +109,4 @@
       DO,N,  SILENCIO,BP,                     \
      SMH_Song_END                             \
     },                                        \
-  }                                           \
-}
+  }

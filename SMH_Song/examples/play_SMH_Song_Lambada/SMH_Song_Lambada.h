@@ -12,7 +12,7 @@
  *   <GPL V3 <http://www.gnu.org/licenses/gpl.html>
 */
 
-#define SMH_Song_Lambada{                                              \
+#define SMH_Song_Lambada                                               \
   (int *[]){                                                           \
    (int[]) {                                                           \
     0,1,1,2,1,1,0,                                                     \
@@ -45,5 +45,4 @@
      SOL,SC,  DO2,SC,  DO2,SC,  DO2,SC,  DO2,N,  SOL,SC,  DO2,SC,  DO2,SC,  DO2,SC,  DO2,N,          \
     SMH_Song_END                                                                                     \
    }                                                                                                 \
-  }                                                                                                  \
-}
+  }
