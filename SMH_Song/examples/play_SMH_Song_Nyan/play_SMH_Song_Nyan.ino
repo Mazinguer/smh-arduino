@@ -3,7 +3,7 @@
  * LAST REV:  25-May-2012
  * DESCRIPTION:
  *   Example for the SMH_Song Arduino library.
- *   The arduino will play the Lambada song
+ *   The arduino will play the Nyan Cat song
  *    through the digital output specified.
  *
  * Please note you'll need at least a speaker to hear the sound.
