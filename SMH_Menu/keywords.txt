@@ -12,7 +12,9 @@ SMH_Menu	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-menu	KEYWORD2
+config	KEYWORD2
+setState  KEYWORD2
+run  KEYWORD2
 
 
 #######################################

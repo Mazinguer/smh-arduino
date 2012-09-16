@@ -1,6 +1,6 @@
 /*
  * AUTHOR:    Samuel M.H. <samuel.mh@gmail.com>
- * LAST REV:  2-Sep-2012
+ * LAST REV:  16-Sep-2012
  * DESCRIPTION:
  *   Arduino C code class for scheduling tasks.
  *
@@ -20,7 +20,6 @@
 */
 SMH_Scheduler::SMH_Scheduler(){
   this->taskList = NULL;
-  this->taskCursor = NULL;
 }
 
 
@@ -30,18 +29,18 @@ SMH_Scheduler::SMH_Scheduler(){
  * PARAMETERS:
  *
  * DESCRIPTION:
- *  Starts a schedule round. Find functions that should be executed
+ *  Starts a schedule round. Finds functions that should be executed
  *   and calls them. 
  */
 void SMH_Scheduler::run(){
   unsigned long time = millis();
-  this->taskCursor = this->taskList;
-  while (this->taskCursor != NULL){
-    if(this->taskCursor->next_time <= time){
-      this->taskCursor->next_time += this->taskCursor->period;
-      this->taskCursor->func(this->taskCursor->funcData);
+  Task* task = this->taskList;
+  while (task != NULL){
+    if(task->next_time <= time){
+      task->next_time += task->period;
+      task->func(task->funcData);
     }
-    this->taskCursor = this->taskCursor->next;
+    task = task->next;
   }
   
 }
@@ -50,15 +49,11 @@ void SMH_Scheduler::run(){
 /*
  * ADDTASK
  *
- * PARAMETERS:
- *   func:     pointer to the function to be executed. It must receive one void* argument.
- *   period:   time between two consecuent executions.
- *
  * DESCRIPTION:
  *  Wrapper to addTask general function.
  */
-void SMH_Scheduler::addTask(void (*func)(void*), unsigned long period){
-  this->addTask(func, period, 0, NULL);  
+unsigned short SMH_Scheduler::addTask(void (*func)(void*), unsigned long period){
+  return(this->addTask(func, period, 0, NULL));
 }  
 
 
@@ -71,17 +66,62 @@ void SMH_Scheduler::addTask(void (*func)(void*), unsigned long period){
  *   delay:    time before the first execution.
  *   funcData: data that will be passed when executing the function.
  *
+ * RETURN:
+ *  The id of the added task.
+ *
  * DESCRIPTION:
- *  Starts a schedule round. Find functions that should be executed
- *   and calls them. 
+ *  Adds a function to the scheduler as a task.
+ *  It's possible to add up to 256 tasks per scheduler object.
  */
-void SMH_Scheduler::addTask(void (*func)(void*), unsigned long period, unsigned long delay, void* funcData){
-  this->taskCursor = (Task*) malloc(sizeof(struct Task));
-  this->taskCursor->func = func;
-  this->taskCursor->funcData = funcData;
-  this->taskCursor->period = period;
-  this->taskCursor->next_time = period+delay;
-  this->taskCursor->next = this->taskList;  
-  this->taskList = this->taskCursor;
+unsigned short SMH_Scheduler::addTask(void (*func)(void*), unsigned long period, unsigned long delay, void* funcData){
+  Task* task = (Task*) malloc(sizeof(struct Task));
+  task->func = func;
+  task->funcData = funcData;
+  task->period = period;
+  task->next_time = period+delay;
+  task->next = this->taskList; 
+  if (this->taskList == NULL){
+    task->id = 0;
+  } else {
+    task->id = this->taskList->id+1;
+  } 
+  this->taskList = task;
+  return (task->id);
+}
+
+/*
+ * DELETETASK
+ *
+ * PARAMETERS:
+ *   id: the id of the task to delete.
+ *
+ * RETURN:
+ *  True if the task could be deleted, otherwise false.
+ *
+ * DESCRIPTION:
+ *  Deletes a task from the scheduler
+ */
+bool SMH_Scheduler::deleteTask(unsigned short id){
+  Task* task = this->taskList;
+  Task* prevTask = NULL;
+  bool retval = false;
+  if (task!=NULL){
+    while ((task!=NULL) && (task->id > id)){
+      prevTask = task;
+      task = task->next;
+    }
+    if (task!=NULL){
+      if (task->id == id){
+        if (prevTask==NULL){
+          this->taskList = task->next; //1st element
+        } else {
+          prevTask->next = task->next;
+        }
+        free(task);
+        retval = true;
+      }
+    }
+  }
+  return(retval);
 }
 

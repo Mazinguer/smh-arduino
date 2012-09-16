@@ -15,6 +15,7 @@ SMH_Scheduler	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 addTask	KEYWORD2
+deleteTask KEYWORD2
 run	KEYWORD2
 
 

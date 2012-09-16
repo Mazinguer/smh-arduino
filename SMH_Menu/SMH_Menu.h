@@ -18,9 +18,14 @@ class SMH_Menu{
   private:
     SMH_LiquidCrystal *lcd;
     SMH_AnalogKeyPad *input;
+    char** items;
+    void (**functions)(SMH_LiquidCrystal*,SMH_AnalogKeyPad*);
+    short state,itemsLength;
   public:
     SMH_Menu(SMH_LiquidCrystal*,SMH_AnalogKeyPad*);
-    void menu(char**, int, void (**)(SMH_LiquidCrystal*,SMH_AnalogKeyPad*));
+    void config(char**, int, void (**)(SMH_LiquidCrystal*,SMH_AnalogKeyPad*));
+    void setState(short);
+    short run();
 };
 
 #endif
