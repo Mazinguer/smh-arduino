@@ -1,6 +1,6 @@
 /*
  * AUTHOR:    Samuel M.H. <samuel.mh@gmail.com>
- * LAST REV:  2-Sep-2012
+ * LAST REV:  16-Sep-2012
  * DESCRIPTION:
  *   Example for the SMH_Scheduler Arduino library.
  *   It shows how it's possible to schedule functions
@@ -19,10 +19,12 @@
 */
 
 
-#include <SMH_Scheduler.h>
+#include "SMH_Scheduler.h"
 
 //Construct the object
 SMH_Scheduler sched;
+int id_del;  //Id of the delete task
+
 
 //Print Hello
 void hello(void *data){
@@ -39,6 +41,15 @@ void print(void *data){
   Serial.println((char*)data);
 }
 
+//Delete task
+void wrapperDeleteTask(void *data){
+  sched.deleteTask((unsigned short) data);
+  Serial.println("Bazinga! deleted");
+  if (sched.deleteTask(id_del)){
+    Serial.println("Auto delete task.");
+  }
+}
+
 
 void setup(){
   Serial.begin(9600);
@@ -49,13 +60,28 @@ void setup(){
   *  you added will be executed first.
   */
   //Print Hello every second
-  sched.addTask(&hello, 1000);
+  int id1 = sched.addTask(&hello, 1000);
   
   //Print World every second but delay the start 0,5 seconds
-  sched.addTask(&world, 1000, 500, NULL);
+  int id2 = sched.addTask(&world, 1000, 500, NULL);
   
   //Print Bazinga! every 2 seconds by calling a function with a parameter.
-  sched.addTask(&print, 2000, 0, (void*)"Bazinga!\n");
+  int id3 = sched.addTask(&print, 2000, 0, (void*)"Bazinga!\n");
+  
+  //Delete print Bazinga! after 10 by calling a wrapper.
+  id_del = sched.addTask(&wrapperDeleteTask,0, 10000, (void*)id3);  
+  
+  Serial.print("ID - Task Hello: ");
+  Serial.println(id1);
+  Serial.print("ID - Task World: ");
+  Serial.println(id2);
+  Serial.print("ID - Task print Bazinga: ");  
+  Serial.println(id3);
+  
+  //Trying to delete a non-existing task
+  if (!sched.deleteTask(44)){
+    Serial.println("Task with id=44 does not exist.");    
+  }
 }
 
 
